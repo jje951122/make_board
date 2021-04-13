@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+<h1><%= title %></h1>
+<form method="post" action="/logout">
+    <input type="submit" value="logout">
+</form> <a href="../public/write.html">글쓰기</a>
+<table border="1">
+    <tr>
+        <td>번호</td>
+        <td>제목</td>
+        <td>작성자</td>
+        <td>등록일</td>
+    </tr>
+    <%
+    for(var i=0; i<rows.length; i++)
+    {
+        var data = rows[i];
+    %>
+    <tr>
+        <td><%=data.BOARD_NUM%></td>
+        <td width="150"><a href="/read/<%= data.BOARD_NUM %>"> <%=data.TITLE%> </a></td>
+        <td><%=data.W_ID%></td>
+        <td><%=data.DATE%></td>
+    </tr>
+    <%}%>
+</table>
+</body>
+</html>
+

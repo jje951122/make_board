@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <form action="/delete_text" method="post">
+            <input type="hidden" name="id" value=<%=row1.BOARD_NUM%>>
+            <input type="submit" value="글 삭제">
+        </form>
+        <form action="/update", method="post">
+        <table border="1">
+            <input type="hidden" name="idx" value="<%=row1.BOARD_NUM%>" />
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name ="name" id="name" value="<%=row1.W_ID%>"/>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name ="title" id="title" value="<%=row1.TITLE%>"/>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="content" id="content" cols="30" rows="10" required><%=row1.CONTENT%></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="/list">목록</a>
+                    <button type="submit">글 수정</button>
+                    
+                </td>
+            </tr>
+        </table>
+
+        </form>
+        <form action="/write_comment", method="post">
+            <input type="hidden" name="B_idx" value="<%=row1.BOARD_NUM%>" />
+            <tr>
+                <td>댓글</td>
+                <td><input type="text" name="comment" id="comment"></td>
+            </tr>
+            <button type="submit">댓글 작성</button>
+        </form>
+
+        <table border="1">
+            <tr>
+                
+                <td>작성자</td>
+                <td>내용</td>
+                <td>등록일</td>
+            </tr>
+            <%
+        for(var i=0; i<row2.length; i++)
+        {
+            var data = row2[i];
+        %>
+        <tr>
+            <td><%=data.WRITER_ID%></td>
+            <td width="150"><%=data.COMMENT_CONTENT%></td>
+            <td><%=data.DATE%></td>
+            <td>
+            <a href="/delete_comment/<%= data.COMMENT_NUM %>"> 삭제 </a>
+            </td>
+        </tr>
+        <%}%>
+        </table>
+    </body>
+</html>
